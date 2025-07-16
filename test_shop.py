@@ -90,3 +90,16 @@ def test_purchase_sweet_insufficient_stock():
     # If there is insufficient stock of product raise value error
     with pytest.raises(ValueError):
         shop.purchase(13, 5)
+
+def test_restock_sweet():
+    shop = SweetShop()
+
+    # Adding sweet
+    sweet = Sweet(14, 'Kaju Katli', 'candy', 30.0, 5)
+    shop.add_sweet(sweet)
+
+    # Calling restock function
+    shop.restock(14, 10)
+
+    # Asserting restock function
+    assert shop.get_sweet(14).quantity == 15
