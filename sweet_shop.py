@@ -46,3 +46,12 @@ class SweetShop:
 # Creating Sorting function to sort by fields like price,id etc..    
     def sort_by(self, field):
         return sorted(self.inventory.values(), key=lambda s: getattr(s, field))
+
+# Creating purchasing function for users    
+    def purchase(self, sweet_id: int, quantity: int):
+        sweet = self.get_sweet(sweet_id)
+        if not sweet:
+            raise ValueError("Sweet not found.")
+        if sweet.quantity < quantity:
+            raise ValueError("Insufficient stock.")
+        sweet.quantity -= quantity
