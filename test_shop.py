@@ -50,3 +50,17 @@ def test_search_sweets():
     assert len(by_name) == 1 and by_name[0].name == 'Candy Stick'
     assert len(by_category) == 1 and by_category[0].name == 'Pastry Delight'
     assert len(by_price) == 2
+
+def test_sort_sweets_by_price():
+    shop = SweetShop()
+
+    # Adding sweets
+    shop.add_sweet(Sweet(9, 'Biscuit', 'cookie', 5.0, 20))
+    shop.add_sweet(Sweet(10, 'Eclair', 'pastry', 12.0, 15))
+    shop.add_sweet(Sweet(11, 'Brownie', 'pastry', 10.0, 10))
+
+    # Calling sort function
+    sorted_by_price = shop.sort_by('price')
+
+    # Asserting sort function
+    assert [s.id for s in sorted_by_price] == [9, 11, 10]
