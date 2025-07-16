@@ -42,3 +42,7 @@ class SweetShop:
             results = [s for s in results if low <= s.price <= high]
 
         return results
+
+# Creating Sorting function to sort by fields like price,id etc..    
+    def sort_by(self, field):
+        return sorted(self.inventory.values(), key=lambda s: getattr(s, field))
