@@ -64,3 +64,29 @@ def test_sort_sweets_by_price():
 
     # Asserting sort function
     assert [s.id for s in sorted_by_price] == [9, 11, 10]
+
+# Creating test function to check successive purchase
+def test_purchase_sweet_success():
+    shop = SweetShop()
+
+    # Adding sweet
+    sweet = Sweet(12, 'Milk Cake', 'candy', 25.0, 10)
+    shop.add_sweet(sweet)
+
+    # Calling purchase function
+    shop.purchase(12, 3)
+
+    #Asserting purchase function whether quantity decreased from stock or not
+    assert shop.get_sweet(12).quantity == 7
+
+# Creating test function checking whether sufficient stock is present or not
+def test_purchase_sweet_insufficient_stock():
+    shop = SweetShop()
+
+    # Adding sweet
+    sweet = Sweet(13, 'Peda', 'candy', 15.0, 2)
+    shop.add_sweet(sweet)
+
+    # If there is insufficient stock of product raise value error
+    with pytest.raises(ValueError):
+        shop.purchase(13, 5)
