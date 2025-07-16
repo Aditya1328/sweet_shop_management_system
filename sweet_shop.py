@@ -6,14 +6,19 @@ class Sweet:
         self.price = price
         self.quantity = quantity
 
+# Creating class performing various functions like  add, delete, search, sort , purchase sweets
 class SweetShop:
     def __init__(self):
         self.inventory = {}
 
 # Creating Add Function to add sweets
     def add_sweet(self, sweet: Sweet):
+
+        # If sweet is present in inventory or it is in stock then raise value error
         if sweet.id in self.inventory:
             raise ValueError("Sweet ID already exists.")
+        
+        # If not present then add it in inventory
         self.inventory[sweet.id] = sweet
 
 # Creating Get Function to get data of sweets
@@ -33,10 +38,15 @@ class SweetShop:
     def search(self, name=None, category=None, price_range=None):
         results = list(self.inventory.values())
 
+        # Searching by name
         if name:
             results = [s for s in results if s.name == name]
+
+        # Searching by category
         if category:
             results = [s for s in results if s.category == category]
+        
+        # Searching by price_range
         if price_range:
             low, high = price_range
             results = [s for s in results if low <= s.price <= high]
@@ -50,8 +60,27 @@ class SweetShop:
 # Creating purchasing function for users    
     def purchase(self, sweet_id: int, quantity: int):
         sweet = self.get_sweet(sweet_id)
+
+        # If sweet is not present then raise value error
         if not sweet:
             raise ValueError("Sweet not found.")
+        
+        # if sweet is present but quantity is not sufficient then raise value error
         if sweet.quantity < quantity:
             raise ValueError("Insufficient stock.")
+        
+        # Else update quantity
         sweet.quantity -= quantity
+
+# Creating restock function to add stock of given id
+    def restock(self, sweet_id: int, quantity: int):
+
+        # Getting sweet with its id
+        sweet = self.get_sweet(sweet_id)
+
+        # If sweet not present than raise value error
+        if not sweet:
+            raise ValueError("Sweet not found.")
+        
+        # If sweet present than add quantity
+        sweet.quantity += quantity
