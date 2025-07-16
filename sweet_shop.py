@@ -17,3 +17,7 @@ class SweetShop:
 
     def get_sweet(self, sweet_id: int):
         return self.inventory.get(sweet_id)
+    
+    def delete_sweet(self, sweet_id: int):
+        if sweet_id in self.inventory:
+            del self.inventory[sweet_id]
