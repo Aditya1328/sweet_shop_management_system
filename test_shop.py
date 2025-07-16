@@ -44,7 +44,7 @@ def test_search_sweets():
     # Calling search Function
     by_name = shop.search(name='Candy Stick')
     by_category = shop.search(category='pastry')
-    by_price = shop.search(price_range=(10, 35))
+    by_price = shop.search(price_range=(10, 55))
 
     # Asserting search function
     assert len(by_name) == 1 and by_name[0].name == 'Candy Stick'
